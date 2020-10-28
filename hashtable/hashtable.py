@@ -20,7 +20,9 @@ class HashTable:
     Implement this.
     """
 
-    def __init__(self, capacity):
+    def __init__(self, capacity=MIN_CAPACITY):
+        self.capacity = capacity
+        self.table = [None] * capacity
         # Your code here
 
 
@@ -34,6 +36,7 @@ class HashTable:
 
         Implement this.
         """
+        return self.capacity
         # Your code here
 
 
@@ -44,6 +47,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
+        pass
 
 
     def fnv1(self, key):
@@ -52,8 +56,8 @@ class HashTable:
 
         Implement this, and/or DJB2.
         """
-
         # Your code here
+        pass
 
 
     def djb2(self, key):
@@ -83,34 +87,34 @@ class HashTable:
     def put(self, key, value):
         """
         Store the value with the given key.
-
         Hash collisions should be handled with Linked List Chaining.
-
         Implement this.
         """
         # Your code here
+        table_index = self.hash_index(key)
+        self.table[table_index] = value
 
 
     def delete(self, key):
         """
         Remove the value stored with the given key.
-
         Print a warning if the key is not found.
-
         Implement this.
         """
         # Your code here
+        table_index = self.hash_index(key)
+        self.table[table_index] = None
 
 
     def get(self, key):
         """
         Retrieve the value stored with the given key.
-
         Returns None if the key is not found.
-
         Implement this.
         """
         # Your code here
+        table_index = self.hash_index(key)
+        return self.table[table_index]
 
 
     def resize(self, new_capacity):
@@ -121,6 +125,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
+        pass
 
 
 
