@@ -58,9 +58,11 @@ class HashTable:
 
     def djb2(self, key):
         """
-        DJB2 hash, 32-bit
-
-        Implement this, and/or FNV-1.
+        The simple C function starts with the hash variable set to the number 5381.
+        It then iterates the given array of characters str and performs the following operations for each character:
+        Multiply the hash variable by 33.
+        Add the ASCII value of the current character to it.
+        After iterating through the whole array, it returns the value held by hash.
         """
         # Your code here
 
