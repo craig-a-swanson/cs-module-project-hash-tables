@@ -64,7 +64,12 @@ class HashTable:
         Add the ASCII value of the current character to it.
         After iterating through the whole array, it returns the value held by hash.
         """
-        # Your code here
+        hash_init = 5381
+
+        for character in key:
+            hash_init = hash_init * 33 + ord(character)
+        
+        return hash_init
 
 
     def hash_index(self, key):
