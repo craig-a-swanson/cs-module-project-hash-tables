@@ -122,7 +122,29 @@ class HashTable:
         """
         # Your code here
         table_index = self.hash_index(key)
-        self.table[table_index] = None
+
+        if self.table[table_index] is None:
+            return None
+        
+        head = self.table[table_index]
+        cur_node = head
+
+        # case where node to delete is the head
+        if cur_node.key == key:
+            head = cur_node.next
+            self.table[table_index] = head
+            return head
+        
+        prev_node = cur_node
+        cur_node = cur_node.next
+
+        while cur_node is not None:
+            if cur_node.key == key:
+                prev_node.next = cur_node.next
+                return cur_node.value
+            else:
+                prev_node = cur_node
+                cur_node = cur_node.next
 
 
     def get(self, key):
