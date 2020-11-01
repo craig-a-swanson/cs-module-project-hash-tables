@@ -23,6 +23,7 @@ class HashTable:
     def __init__(self, capacity=MIN_CAPACITY):
         self.capacity = capacity
         self.table = [None] * capacity
+        self.node_count = 0
         # Your code here
 
 
@@ -47,7 +48,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        pass
+        return self.node_count/self.capacity
 
 
     def fnv1(self, key):
@@ -83,23 +84,41 @@ class HashTable:
         """
         #return self.fnv1(key) % self.capacity
         return self.djb2(key) % self.capacity
+    
+    def search_linkedlist(self, key):
+        pass
 
     def put(self, key, value):
         """
-        Store the value with the given key.
-        Hash collisions should be handled with Linked List Chaining.
-        Implement this.
+        Go to the index of the array.
+        Search through the linked list if present.
+        If the key exists, replace the value;
+        Else add a new node to the linked list.
         """
-        # Your code here
         table_index = self.hash_index(key)
-        self.table[table_index] = value
+        new_node = HashTableEntry(key, value)
 
+        if self.table[table_index] is None:
+            self.table[table_index] = new_node
+        else:
+            head = self.table[table_index]
+            cur_node = head
+            while cur_node is not None:
+                if cur_node.key == key:
+                    cur_node.value = value
+                    return True
+                else:
+                    cur_node = cur_node.next
+            
+            new_node.next = head
+            head = new_node
+            self.table[table_index] = head
 
     def delete(self, key):
         """
-        Remove the value stored with the given key.
-        Print a warning if the key is not found.
-        Implement this.
+        Go to the index of the array.
+        Search through the linked list for the matching key.
+        Delete that node and return the value.
         """
         # Your code here
         table_index = self.hash_index(key)
@@ -108,13 +127,26 @@ class HashTable:
 
     def get(self, key):
         """
-        Retrieve the value stored with the given key.
-        Returns None if the key is not found.
-        Implement this.
+        Go to the index of the array.
+        Search through the linked list for the matching key.
+        If the key exists, return the value, else None.
         """
         # Your code here
         table_index = self.hash_index(key)
-        return self.table[table_index]
+
+        if self.table[table_index] is None:
+            return None
+        
+        head = self.table[table_index]
+        cur_node = head
+        while cur_node is not None:
+            # print(f'searching for {key}')
+            if cur_node.key == key:
+                # print(f'for index {table_index} returning {cur_node.value}')
+                return cur_node.value
+            else:
+                cur_node = cur_node.next
+        return None
 
 
     def resize(self, new_capacity):
