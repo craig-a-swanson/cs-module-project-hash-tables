@@ -84,9 +84,6 @@ class HashTable:
         """
         #return self.fnv1(key) % self.capacity
         return self.djb2(key) % self.capacity
-    
-    def search_linkedlist(self, key):
-        pass
 
     def put(self, key, value):
         """
@@ -100,6 +97,7 @@ class HashTable:
 
         if self.table[table_index] is None:
             self.table[table_index] = new_node
+            self.node_count += 1
         else:
             head = self.table[table_index]
             cur_node = head
@@ -113,6 +111,7 @@ class HashTable:
             new_node.next = head
             head = new_node
             self.table[table_index] = head
+            self.node_count += 1
 
     def delete(self, key):
         """
@@ -133,6 +132,7 @@ class HashTable:
         if cur_node.key == key:
             head = cur_node.next
             self.table[table_index] = head
+            self.node_count -= 1
             return head
         
         prev_node = cur_node
@@ -141,6 +141,7 @@ class HashTable:
         while cur_node is not None:
             if cur_node.key == key:
                 prev_node.next = cur_node.next
+                self.node_count -= 1
                 return cur_node.value
             else:
                 prev_node = cur_node
@@ -178,8 +179,12 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
-        pass
+        # make a new array (not a whole new table)
+        # loop over your existing (old) storage
+        # if the array index is not None, iterate through linked list there
+        # for each node you find, call put()
+        new_table = [None] * new_capacity
+        self.capacity = new_capacity
 
 
 
