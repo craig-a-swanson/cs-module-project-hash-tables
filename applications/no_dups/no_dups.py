@@ -1,5 +1,21 @@
+
+# I'm not sure the overall time complexity since I think split is O(n) and
+# I am iterating through the words of the string. I think that worst case
+# it is O(2n), which reduces to O(n)
+
 def no_dups(s):
-    # Your code here
+
+    word_dict = {}
+    final_string = ""
+
+    for word in s.split():
+        if word not in word_dict:
+            word_dict[word] = True
+            if len(word_dict) == 1:
+                final_string = word
+            else:
+                final_string += f' {word}'
+    return final_string
 
 
 
