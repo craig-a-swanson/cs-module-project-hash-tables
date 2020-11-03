@@ -24,7 +24,6 @@ class HashTable:
         self.capacity = capacity
         self.table = [None] * capacity
         self.node_count = 0
-        # Your code here
 
 
     def get_num_slots(self):
@@ -183,9 +182,18 @@ class HashTable:
         # loop over your existing (old) storage
         # if the array index is not None, iterate through linked list there
         # for each node you find, call put()
-        new_table = [None] * new_capacity
+        table_copy = self.table
+        self.table = [None] * new_capacity
         self.capacity = new_capacity
 
+        for element in table_copy:
+            if element is not None:
+                cur_node = element
+                while cur_node is not None:
+                    self.put(cur_node.key, cur_node.value)
+                    cur_node = cur_node.next
+        
+        table_copy = None
 
 
 if __name__ == "__main__":
