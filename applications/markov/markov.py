@@ -55,20 +55,8 @@ for index, word in enumerate(parsed_words):
 start_words = list(set(start_words))
 stop_words = list(set(stop_words))
 
-# 3. Choose a random "start word" to begin.
 
-# 4. Loop through:
-
-#    * Print the word.
-#    * If it's a "stop word", stop.
-#    * Else randomly choose a word that can follow this one.
-
-# Hints:
-# * `random.choice()` can choose a random word out of a list.
-# * `print(s, end=" ")` will print a space after every word instead of a
-#   newline.
-
-# TODO: construct 5 random sentences
+# construct 5 random sentences
 for _ in range(5):
     continue_sentence = True
     random_start = random.choice(start_words)
