@@ -69,21 +69,21 @@ stop_words = list(set(stop_words))
 #   newline.
 
 # TODO: construct 5 random sentences
-continue_sentence = True
-random_start = random.choice(start_words)
-current_word = random_start
-if current_word in stop_words:
-    continue_sentence = False
-    print(current_word)
-else:
-    print(current_word, end=" ")
-while continue_sentence:
-    following_word_choices = list(markov_dict[current_word])
-    following_word = random.choice(following_word_choices)
-    current_word = following_word
+for _ in range(5):
+    continue_sentence = True
+    random_start = random.choice(start_words)
+    current_word = random_start
     if current_word in stop_words:
-        print(current_word)
         continue_sentence = False
-        break
+        print(current_word)
     else:
         print(current_word, end=" ")
+    while continue_sentence:
+        following_word_choices = list(markov_dict[current_word])
+        following_word = random.choice(following_word_choices)
+        current_word = following_word
+        if current_word in stop_words:
+            print(current_word)
+            continue_sentence = False
+        else:
+            print(current_word, end=" ")
