@@ -1,5 +1,17 @@
 def word_count(s):
-    # Your code here
+    
+    word_dict = {}
+
+    # ignore_chars = 
+
+    s = s.lower()
+    s = s.translate({ord(char): None for char in ('":;,.-+=/\|[]{}()*^&')})
+    for word in s.split():
+        if word not in word_dict:
+            word_dict[word] = 0
+        word_dict[word] += 1
+
+    return word_dict
 
 
 
