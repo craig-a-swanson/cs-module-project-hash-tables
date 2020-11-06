@@ -22,7 +22,8 @@ def word_count(file_name):
             longest_word = len(cleaned_word)
 
     # source of following statement: https://stackoverflow.com/questions/613183/how-do-i-sort-a-dictionary-by-value
-    word_dict = {key: value for key, value in sorted(word_dict.items(), key=lambda item: item[1], reverse=True)}
+    word_dict = {key: value for key, value in sorted(word_dict.items(), key=lambda item: item[0])}
+    word_dict = {key: value for key, value in sorted(word_dict.items(), key=lambda item: (item[1]), reverse=True)}
 
     for word, count in word_dict.items():
         hash_string = '#'*count
@@ -32,7 +33,3 @@ def word_count(file_name):
     return word_dict
 
 word_count('robin.txt')
-
-# can use negatives to sort when reverse() can't be used
-# can sort() on more than one item at a time
-# can print a variable field width in a f-string with nested braces: '{x:{y}}'
