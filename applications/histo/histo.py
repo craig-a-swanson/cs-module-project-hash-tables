@@ -1,6 +1,4 @@
 
-
-
 def word_count(file_name):
 
     with open(file_name) as text_file:
